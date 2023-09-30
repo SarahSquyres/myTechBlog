@@ -2,30 +2,40 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>myTechBlog</title>
- <link rel="stylesheet" href="/styles/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tech Blog</title>
+    <link rel="stylesheet" href="/styles/style.css">
 </head>
 
 <body>
-      <header>
-    <h1>Welcome to myTechBlog.</h1>
-  </header>
+    <div class="wrapper">
+        <header>
+            <h1>
+                <a href="/">Home</a>
+            </h1>
+            <nav>
+                {{#if loggedIn}}
+                <a href="/dashboard">Dashboard</a>
+                <button id="logout" class="btn-no-style logout">Logout</button>
+                {{else}}
+                <a href="/login">Login</a>
+                {{/if}}
+            </nav>
+        </header>
+        <div class="site-row">
+            <div class="site-name">
+                <h1>myTechBlog</h1>
+            </div>
+        </div>
+        <main>
+            {{{ body }}}
+        </main>
+    </div>
 
-    <nav>
-    <a href="/">Home</a>
     {{#if loggedIn}}
-    <a href="/dashboard">dashboard</a>
-    <button id="logout" class="btn-no-style">Logout</button>
-    {{else}}
-    <a href="/login">Login</a>
+    <script src="/js/logout.js"></script>
     {{/if}}
-  </nav>
-  <main>
-     {{{ body }}}
-  </main>
-  {{#if loggedIn}}
-  <script src="/js/logout.js"></script>
-  {{/if}}
 </body>
+
+</html>
