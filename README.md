@@ -15,6 +15,14 @@ myTechBlog is an application for users that want to talk tech.  Users can create
 
 ![webpage screenshot](./public/images/myTechBlog.JPG)
 
+Heroku deployment:
+
+https://mytechblogsquyres-d2520e34ead7.herokuapp.com/ 
+
+GitHub:
+
+https://github.com/SarahSquyres/myTechBlog 
+
 
 ## Installation
 
