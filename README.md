@@ -7,12 +7,13 @@
 * [Usage](#usage)
 * [License](#license)
 * [Sources](#sources)
-* [Questions](#questions)
 
 
 ## Description
 
 myTechBlog is an application for users that want to talk tech.  Users can create posts and comments to connect with other tech-minded individuals.
+
+![webpage screenshot](./public/images/myTechBlog.JPG)
 
 
 ## Installation
@@ -39,9 +40,8 @@ This project is licensed under the MIT license.
 I would like to first thank my tutor and TAs for supporting me as I develop this project.  
 
 Other Sources:
-W3 School
+https://github.com/OwaisIslam/tech-blog
 Google Bard
-https://www.npmjs.com/package/express-list-endpoints
-https://www.npmjs.com/package/cookie-session 
+Xpert Learning Assistant
 
 
