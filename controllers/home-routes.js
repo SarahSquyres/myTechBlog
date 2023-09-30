@@ -3,7 +3,7 @@ const sequelize = require('../config/connection');
 const {
     User,
     Post,
-
+    Comment
 } = require('../models');
 
 router.get('/', (req, res) => {
@@ -14,11 +14,18 @@ router.get('/', (req, res) => {
                 'content',
                 'created_at'
             ],
-            include: [
-                {
+            include: [{
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
                     model: User,
                     attributes: ['username']
                 }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
             ]
         })
         .then(dbPostData => {
@@ -49,17 +56,17 @@ router.get('/post/:id', (req, res) => {
                 'created_at'
             ],
             include: [{
-                    model: Comment,
-                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                    include: {
-                        model: User,
-                        attributes: ['username']
-                    }
-                },
-                {
+                model: Comment,
+                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                include: {
                     model: User,
                     attributes: ['username']
                 }
+            },
+            {
+                model: User,
+                attributes: ['username']
+            }
             ]
         })
         .then(dbPostData => {
@@ -74,7 +81,7 @@ router.get('/post/:id', (req, res) => {
                 plain: true
             });
 
-            res.render('singlePost', {
+            res.render('single-post', {
                 post,
                 loggedIn: req.session.loggedIn
             });

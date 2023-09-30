@@ -15,7 +15,15 @@ router.get("/", (req, res) => {
             include: [{
                     model: User,
                     attributes: ["username"],
-                }
+                },
+                {
+                    model: Comment,
+                    attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                    include: {
+                        model: User,
+                        attributes: ["username"],
+                    },
+                },
             ],
         })
         .then((dbPostData) => res.json(dbPostData))
@@ -32,9 +40,17 @@ router.get("/:id", (req, res) => {
             },
             attributes: ["id", "content", "title", "created_at"],
             include: [{
+                model: User,
+                attributes: ["username"],
+            },
+            {
+                model: Comment,
+                attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                include: {
                     model: User,
                     attributes: ["username"],
-                }
+                },
+            },
             ],
         })
         .then((dbPostData) => {

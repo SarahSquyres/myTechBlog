@@ -2,6 +2,7 @@ const router = require('express').Router();
 const {
     User,
     Post,
+    Comment
 } = require('../../models');
 
 router.get('/', (req, res) => {
@@ -28,6 +29,14 @@ router.get('/:id', (req, res) => {
             include: [{
                     model: Post,
                     attributes: ['id', 'title', 'content', 'created_at']
+                },
+                {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'created_at'],
+                    include: {
+                        model: Post,
+                        attributes: ['title']
+                    }
                 }
             ]
         })

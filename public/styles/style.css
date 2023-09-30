@@ -8,9 +8,13 @@ html {
     padding: 0;
     margin: 0;
     font-family: sans-serif;
+    color: #333;
 }
 
-
+main,
+.site-name {
+    background-color: #b8cba2;
+}
 
 a,
 .btn-no-style,
@@ -20,45 +24,51 @@ a,
 
 a:hover,
 .btn-no-style:hover {
-    color: #96e3fa;
+    color: #e2edd5;
 }
 
 a {
     text-decoration: none;
+    font-weight: bold;
+    transition: color .1s;
 }
 
 button {
+    background-color: #225ca3;
     border: 0;
     padding: 1%;
+    color: white;
     font-weight: bold;
+    transition: background-color .1s;
     cursor: pointer;
+    border-radius: 5px;
 }
 
 button:hover {
-    background-color: #96e3fa;
+    background-color: #3486eb;
 }
 
-.postList {
+.post-list {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
 
 .go-back {
-    color: #000000;
+    color: #2c2307;
 }
 
 textarea,
 input {
     padding: .5%;
     border-radius: 5px;
-    border: 1px solid;
+    border: 1px solid #ccc;
 }
 
 textarea:focus,
 input:focus {
     outline: none;
-    border: 1px solid;
+    border: 1px solid #3486eb;
 }
 
 textarea {
@@ -89,10 +99,18 @@ form label {
     justify-content: space-between;
 }
 
+header,
+.site-row,
+.info-section,
+.form-heading {
+    background-color: #2c2307;
+}
+
 .login-page,
 .sign-in-page,
 .new-form-page,
 .edit-form-page {
+    border: 3px solid black;
     padding-bottom: 10px;
 }
 
@@ -126,6 +144,7 @@ header h1 {
 
 .site-row {
     display: flex;
+    border-bottom: 1px solid #ccc;
     justify-content: center;
 }
 
@@ -147,6 +166,8 @@ main {
     cursor: pointer;
     text-decoration: none;
     font-size: 100%;
+    font-weight: bold;
+    transition: color .1s;
     margin-left: 16px;
 }
 
@@ -154,23 +175,49 @@ main {
     background: none;
 }
 
+.delete-post-btn {
+    background-color: #d41414;
+}
+
 .delete-post-btn:hover {
-    background-color: #96e3fa;
+    background-color: #ff643d;
 }
 
 .post {
     margin-bottom: 2%;
     line-height: 150%;
+    border: 3px solid black;
 }
 
 .post .title span {
     font-style: italic;
     font-size: 90%;
+    color: #7d7d7d;
 }
 
 .edit-link {
     display: block;
     margin: -1.5% 0 2% 0;
+    color: #2c2307;
+}
+
+.comment-form {
+    margin-bottom: 5%;
+}
+
+.comment {
+    padding: 1%;
+    margin-bottom: 1%;
+}
+
+.comment:nth-child(odd) {
+    background-color: #fff5eb;
+}
+
+.comment .meta {
+    font-size: 90%;
+    margin-bottom: .5%;
+    opacity: .6;
 }
 
 .new-post-form input {
@@ -197,7 +244,12 @@ main {
 
 .sign-in-link,
 .login-link {
-    color: #000000;
+    color: #2c2307;
+}
+
+.form-heading h1,
+.form-heading h2 {
+    color: #b8cba2;
 }
 
 .login-form,
