@@ -12,7 +12,7 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 const sess = {
-    secret: 'Wanderlust15!',
+    secret: process.env.SECRET,
     cookie: {
 
     },
@@ -40,7 +40,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync();
-app.listen(PORT, () => {
-    console.log(`App listening on port ${PORT}!`);
-});
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log(`App listening on port ${PORT}!`));
+  });
