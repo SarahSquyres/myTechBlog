@@ -1,11 +1,13 @@
 const router = require('express').Router();
 const {
     User,
-    Post
+    Post,
+    Comment
 } = require('../../models');
 const withAuth = require('../../utils/auth');
 
 
+// Get all posts
 router.get("/", (req, res) => {
     Post.findAll({
             attributes: ["id", "content", "title", "created_at"],
@@ -33,6 +35,7 @@ router.get("/", (req, res) => {
         });
 });
 
+// Get a single post
 router.get("/:id", (req, res) => {
     Post.findOne({
             where: {
@@ -40,17 +43,17 @@ router.get("/:id", (req, res) => {
             },
             attributes: ["id", "content", "title", "created_at"],
             include: [{
-                model: User,
-                attributes: ["username"],
-            },
-            {
-                model: Comment,
-                attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-                include: {
                     model: User,
                     attributes: ["username"],
                 },
-            },
+                {
+                    model: Comment,
+                    attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                    include: {
+                        model: User,
+                        attributes: ["username"],
+                    },
+                },
             ],
         })
         .then((dbPostData) => {
@@ -68,7 +71,9 @@ router.get("/:id", (req, res) => {
         });
 });
 
+// Create a post
 router.post("/", withAuth, (req, res) => {
+    console.log("creating");
     Post.create({
             title: req.body.title,
             content: req.body.post_content,
@@ -81,6 +86,7 @@ router.post("/", withAuth, (req, res) => {
         });
 });
 
+// Update a post
 router.put("/:id", withAuth, (req, res) => {
     Post.update({
             title: req.body.title,
@@ -91,7 +97,7 @@ router.put("/:id", withAuth, (req, res) => {
             },
         })
         .then((dbPostData) => {
-            if (!db) {
+            if (!dbPostData) {
                 res.status(404).json({
                     message: "No post found with this id"
                 });
@@ -105,6 +111,7 @@ router.put("/:id", withAuth, (req, res) => {
         });
 });
 
+//Delete a post
 router.delete("/:id", withAuth, (req, res) => {
     Post.destroy({
             where: {
@@ -125,5 +132,6 @@ router.delete("/:id", withAuth, (req, res) => {
             res.status(500).json(err);
         });
 });
+
 
 module.exports = router;

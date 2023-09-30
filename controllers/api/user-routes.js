@@ -5,6 +5,7 @@ const {
     Comment
 } = require('../../models');
 
+// Get all users
 router.get('/', (req, res) => {
     User.findAll({
             attributes: {
@@ -18,6 +19,7 @@ router.get('/', (req, res) => {
         });
 });
 
+// Get specific user
 router.get('/:id', (req, res) => {
     User.findOne({
             attributes: {
@@ -55,6 +57,7 @@ router.get('/:id', (req, res) => {
         });
 });
 
+// Create a user
 router.post('/', (req, res) => {
     User.create({
             username: req.body.username,
@@ -84,7 +87,7 @@ router.post('/login', (req, res) => {
         .then(dbUserData => {
             if (!dbUserData) {
                 res.status(400).json({
-                    message: 'No user found!'
+                    message: 'No user with that username!'
                 });
                 return;
             }
@@ -96,7 +99,7 @@ router.post('/login', (req, res) => {
 
                 res.json({
                     user: dbUserData,
-                    message: 'You are logged in!'
+                    message: 'You are now logged in!'
                 });
             });
 
@@ -104,7 +107,7 @@ router.post('/login', (req, res) => {
 
             if (!validPassword) {
                 res.status(400).json({
-                    message: 'Something is incorrect...'
+                    message: 'Incorrect password!'
                 });
                 return;
             }
@@ -116,7 +119,7 @@ router.post('/login', (req, res) => {
 
                 res.json({
                     user: dbUserData,
-                    message: 'You are logged in!'
+                    message: 'You are now logged in!'
                 });
             });
         });
@@ -130,6 +133,7 @@ router.post('/logout', (req, res) => {
     } else {
         res.status(404).end();
     }
+
 });
 
 module.exports = router;

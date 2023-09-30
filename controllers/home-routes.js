@@ -6,6 +6,7 @@ const {
     Comment
 } = require('../models');
 
+
 router.get('/', (req, res) => {
     Post.findAll({
             attributes: [
@@ -15,17 +16,17 @@ router.get('/', (req, res) => {
                 'created_at'
             ],
             include: [{
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                {
                     model: User,
                     attributes: ['username']
                 }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
             ]
         })
         .then(dbPostData => {
@@ -56,17 +57,17 @@ router.get('/post/:id', (req, res) => {
                 'created_at'
             ],
             include: [{
-                model: Comment,
-                attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
-                include: {
+                    model: Comment,
+                    attributes: ['id', 'comment_text', 'post_id', 'user_id', 'created_at'],
+                    include: {
+                        model: User,
+                        attributes: ['username']
+                    }
+                },
+                {
                     model: User,
                     attributes: ['username']
                 }
-            },
-            {
-                model: User,
-                attributes: ['username']
-            }
             ]
         })
         .then(dbPostData => {
@@ -109,5 +110,12 @@ router.get('/signup', (req, res) => {
 
     res.render('signup');
 });
+
+
+router.get('*', (req, res) => {
+    res.status(404).send("Can't go there!");
+    // res.redirect('/');
+})
+
 
 module.exports = router;

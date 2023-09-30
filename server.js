@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
-const session = require('express-session');
 const exphbs = require('express-handlebars');
+const session = require('express-session');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 
 const routes = require('./controllers');
@@ -14,20 +14,22 @@ const PORT = process.env.PORT || 3001;
 const sess = {
     secret: 'Wanderlust15!',
     cookie: {
-      maxAge: 24 * 60 * 60 * 1000, // expires after 1 day
+
     },
     resave: false,
     saveUninitialized: true,
     store: new SequelizeStore({
-      db: sequelize,
-      checkExpirationInterval: 1000 * 60 * 10, // will check every 10 minutes
+        db: sequelize,
+        checkExpirationInterval: 1000 * 60 * 10, // will check every 10 minutes
         expiration: 1000 * 60 * 30 // will expire after 30 minutes
-    }),
-  };
+    })
+};
 
-  app.use(session(sess));
+app.use(session(sess));
 
-const hbs = exphbs.create({helpers});
+const hbs = exphbs.create({
+    helpers
+});
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -38,10 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
 
-sequelize.sync({ force: false }).then(() => {
-    app.listen(PORT, () =>
-      console.log(
-        `\nServer running on port ${PORT}. Visit http://localhost:${PORT} and create an account!`
-      )
-    );
-  });
+sequelize.sync();
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
+});
